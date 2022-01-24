@@ -1,10 +1,10 @@
+import styles from '../styles/AboutMe.module.scss'
 
 
-export default function About_me() {
+export default function AboutMe() {
     return (
-        <div>
+        <div className={styles.test}>
             About Me Page
-            
         </div>
     )
 }
