@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 
 export default function Footer() {
-  return <footer>
+  return <footer className={styles.footer}>
             <div className={styles.container}>
                 <div className="icons-wraper">
                     <Link href='https://www.facebook.com/ilyaverano'  > 
@@ -31,7 +31,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className={styles.container}>
-                <p className={styles.created}> Created with love 💖 by tisot_studio </p>
+                <p className={styles.created}> Created with 💖 by tisot_studio </p>
             </div>
         </footer>;
 }
