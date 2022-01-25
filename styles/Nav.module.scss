@@ -1,10 +1,60 @@
 .nav {
     height: 4.3rem;
     width: 100%;
-    border-bottom: 1px solid black;
-    margin: 0 2rem;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid rgb(168, 168, 168);
+    padding: 0 2rem;
     position: fixed;
     top: 0;
     z-index: 1;
     background-color: white;
+
+
+    .logo {
+        text-align: left;
+        width: 50%;
+        display: flex;
+        align-items: flex-end;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding-bottom: 0.5rem;
+ 
+
+    }
+
+    .buttonsContainer {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding-bottom: 0.5rem;
+        
+
+        .navButton {
+            margin: 0 1rem;
+            border: 1px solid black;
+            border-radius: 20px;
+            padding: 11px 10px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .currentLanguge {
+            color: white;
+            background: black;
+        }
+    }
+}
+
+
+// mobile style
+@media (max-width: 768px) {
+
+    .logo {
+        font-size: 1rem;
+    }
+
+
 }

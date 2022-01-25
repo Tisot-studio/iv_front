@@ -1,6 +1,8 @@
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
+import { Provider } from 'react-redux'
+import { store } from '../redux/store'
 
 import '../styles/globals.css'
 
@@ -10,9 +12,11 @@ import Nav from '../components/Nav'
 
 function MyApp({ Component, pageProps }) {
   return <div>
-            <Nav/>
-            <Component {...pageProps} />
-            <Footer/>
+            <Provider store={store}>
+              <Nav/>
+              <Component {...pageProps} />
+              <Footer/>
+            </Provider>
         </div>
 }
 

@@ -1,9 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
+import { useSelector } from 'react-redux'
 
 
 export default function Home() {
+
+  const language = useSelector((state)=> state.language)
+  const { currentLanguage } = language
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,7 +20,7 @@ export default function Home() {
       <main className={styles.main}>
 
         <div className={styles.logoContainer}>
-          <h1 className={`${styles.h1} ${styles.ilya}`}>ILYA</h1>
+          <h1 className={`${styles.h1} ${styles.ilya}`}> ILYA</h1>
           <h1 className={`${styles.h1} ${styles.verano}`}>VERANO</h1>
         </div>
         
@@ -24,10 +29,16 @@ export default function Home() {
             <Image src='/imgs/IMG_0962_web.jpg' width={600} height={400} />
           </div>
           <div className={styles.text}>
-              DJ and <br/> producer <br/> from Russia
+            { currentLanguage === 'en' ? 
+            <> DJ and <br/> producer <br/> from Russia </> 
+            : 
+            <> DJ и <br/> музыкант <br/> из России </> }
           </div>
           <div className={styles.textMobile}>
-              DJ and  producer from Russia
+          { currentLanguage === 'en' ? 
+            <> DJ and  producer from Russia </> 
+            : 
+            <> DJ и музыкант из России </> }
           </div>
         </div>
       </main>
