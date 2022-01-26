@@ -5,3 +5,8 @@ export const ruLanguage = ()=> ({
 export const enLanguage = ()=> ({
     type: 'EN'
 })
+
+export const switchMenu = ()=> ({
+    type: 'SWITCH_MENU'
+})
+

@@ -1,9 +1,10 @@
 
 const INITIAL_STATE = {
-    currentLanguage: 'en'
+    currentLanguage: 'en',
+    menuOpen: false
 }
 
-export const languageReducer = (state=INITIAL_STATE, action)=>{
+export const navReducer = (state=INITIAL_STATE, action)=>{
     switch(action.type) {
         case 'RU':
             return{
@@ -14,6 +15,11 @@ export const languageReducer = (state=INITIAL_STATE, action)=>{
             return{
                 ...state,
                 currentLanguage: 'en' 
+            }
+        case 'SWITCH_MENU':
+            return{
+                ...state,
+                menuOpen: !state.menuOpen, 
             }
        
     default: return state

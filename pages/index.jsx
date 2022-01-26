@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux'
 
 export default function Home() {
 
-  const language = useSelector((state)=> state.language)
-  const { currentLanguage } = language
+  const navigation = useSelector((state)=> state.navigation)
+  const { currentLanguage } = navigation
 
   return (
     <div className={styles.container}>
