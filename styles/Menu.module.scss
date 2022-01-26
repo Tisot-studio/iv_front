@@ -8,23 +8,35 @@
     justify-content: center;
     align-items: center;
     z-index: -1;
+    transition: all 0.7s cubic-bezier(0.37, 0, 0.64, 0.92);
+}
+
+.menuItem {
+    color: white;
+    width: 100%;
+    height: 3.9rem;
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    overflow: hidden;
     transition: all 0.7s ease-in-out;
-
-
-
-
-    .menuItem {
-        color: white;
-        width: 100%;
-        padding: 0.5rem;
-        text-align: center;
-        font-size: 2.5rem;
-        font-weight: bold;
-        letter-spacing: 1.5px;
-        transition: all 1s ease-in-out;
-        opacity: 0;
+    
+    .underline {
+        width: 0;
+        background: white;
+        height: 1px;
+        transition: all 0.3s ease-in-out;
     }
 
+    &:hover {
+        .underline {
+            width: 100%;
+        }
+    }
 }
 
 .menuClosed {
@@ -37,7 +49,7 @@
     justify-content: center;
     align-items: center;
     z-index: -1;
-    transition: all 1s ease 1s;
     transform: translateY(-1000px); 
-    // border-radius: 50%;
+    transition: all 0.5s cubic-bezier(0.37, 0, 0.64, 0.92);
+    transition-delay: 1s;
 }

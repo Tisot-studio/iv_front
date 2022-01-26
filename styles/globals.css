@@ -19,5 +19,24 @@ a {
 }
 
 
+/* // Базовые настройки для скрола */
+html::-webkit-scrollbar{
+    width: 4px;
+}
+
+/* // Сама полоска скрола */
+html::-webkit-scrollbar-track{
+    background-color: rgb(126, 126, 126);
+}
+
+/* // Бегунок отображающий позицию на странице */
+html::-webkit-scrollbar-thumb{
+    background-color: rgb(0, 0, 0);
+    border-radius: 50px;
+}
+
+/* // Для стилизации определенного скролл-бара, необходимо перед webkit-scrollbar 
+// указать имя класса контейнера */
+
 
 

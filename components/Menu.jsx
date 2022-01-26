@@ -14,6 +14,8 @@ export default function Menu() {
     const { menuOpen } = navigation
 
     // Animation
+
+    // Create array with React refs
     const menuItemAnim = useRef([])
     menuItemAnim.current = []
 
@@ -24,51 +26,54 @@ export default function Menu() {
     };
 
     useEffect(()=>{
-
-        if(menuOpen) {
-           menuItemAnim.current.forEach(el => gsap.to(el, {opacity: 1, delay: 1, duration: 1, y: -20}))
+        if(menuOpen === true) {
+           menuItemAnim.current.forEach(el =>  gsap.to(el, {y: 0, delay: 0.5, duration: 0.7}))
         }
         else {
-            menuItemAnim.current.forEach(el => gsap.to(el, {opacity: 0, delay: 1, duration: 1, y: 20}))
+            menuItemAnim.current.forEach(el => gsap.to(el, { y: 100, delay: 0.4, duration: 0.7}))
         }
-
     }, [menuOpen])
 
 
   return <div className={`${ menuOpen ? styles.menuOpen : styles.menuClosed } `} >
 
-                <div className={styles.menuItem} onClick={()=> dispatch(switchMenu())} ref={addToRefs}>
+                <div className={styles.menuItem} onClick={()=> dispatch(switchMenu())} >
                     <Link href='/about_me' >
                         <a>
-                            ABOUT ME
+                           <p className={styles.a} ref={addToRefs}> ABOUT ME </p>
+                           <div className={styles.underline} ref={addToRefs}></div> 
                         </a>
                     </Link>   
                 </div>
-                <div className={styles.menuItem} onClick={()=> dispatch(switchMenu())} ref={addToRefs}>
-                    <Link href='/tracks'>
+                <div className={styles.menuItem} onClick={()=> dispatch(switchMenu())} >
+                    <Link href='/tracks' >
                         <a>
-                        TRACKS
+                            <p className={styles.a} ref={addToRefs}> TRACKS </p>
+                            <div className={styles.underline} ref={addToRefs}></div>
                         </a>
                     </Link> 
                 </div>
-                <div className={styles.menuItem} onClick={()=> dispatch(switchMenu())} ref={addToRefs}>
-                    <Link href='/radio_shows'>
+                <div className={styles.menuItem} onClick={()=> dispatch(switchMenu())} >
+                    <Link href='/radio_shows' >
                         <a>
-                        RADIO SHOWS
+                            <p className={styles.a} ref={addToRefs}> RADIO SHOWS </p>
+                            <div className={styles.underline} ref={addToRefs}></div>
                         </a>
                     </Link> 
                 </div>
-                <div className={styles.menuItem} onClick={()=> dispatch(switchMenu())} ref={addToRefs}>
-                    <Link href='/video'>
+                <div className={styles.menuItem} onClick={()=> dispatch(switchMenu())} >
+                    <Link href='/video' >
                         <a>
-                        VIDEO
+                            <p className={styles.a} ref={addToRefs}> VIDEO </p>
+                            <div className={styles.underline} ref={addToRefs}></div>
                         </a>
                     </Link> 
                 </div>
-                <div className={styles.menuItem} onClick={()=> dispatch(switchMenu())} ref={addToRefs}>
-                    <Link href='/contacts'>
+                <div className={styles.menuItem} onClick={()=> dispatch(switchMenu())} >
+                    <Link href='/contacts' >
                         <a>
-                        CONTACTS
+                            <p className={styles.a} ref={addToRefs}> CONTACTS </p>
+                            <div className={styles.underline} ref={addToRefs}></div>
                         </a>
                     </Link> 
                 </div>
