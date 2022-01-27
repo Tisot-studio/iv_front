@@ -12,7 +12,7 @@ export default function AboutMe() {
     return (
         <div className={styles.aboutMePage}>
              <Head>
-                <title>Ilya Vearano | About Me</title>
+                <title>Ilya Verano | About Me</title>
                 <meta name="description" content="About Me" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>

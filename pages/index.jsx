@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Ilya Vearano | DJ and producer from Russia</title>
+        <title>Ilya Verano | DJ and producer from Russia</title>
         <meta name="description" content="DJ and producer from Russia" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
