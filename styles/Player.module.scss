@@ -1,0 +1,102 @@
+.playerContainer {
+    width: 100%;
+    padding: 0 2rem;
+    height: 3.5rem;
+    border: 1px solid black;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background: black;
+    color: white;
+    bottom: 0;
+    z-index: 999;
+
+
+    .buttonContainer {
+        width: 50px;
+        border-right: 1px solid black;
+        font-size: 2.5rem;
+        cursor: pointer;
+
+    }
+
+    .coverContainer {
+        width: 50px;
+        height: 100%;
+        border-right: 1px solid black;
+        background-image: url('/imgs/covers/amazing_machine.jpg');
+        background-size: cover;
+        margin: 0 0.5rem;
+    }
+
+    .titleContainer {
+        margin: 0 0.5rem;
+    }
+
+    .rewindButtonsContainer {
+        width: 200px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0.5rem;
+        padding-top: 1rem;
+
+        .rewindButtonContainer {
+            margin: 0 1rem;
+            cursor: pointer;
+        }
+
+        .rewindTime {
+            padding-top: 0.1rem;
+            font-size: 0.7rem;
+        }
+    }
+
+    .progressBarContainer {
+        display: flex;
+        width: 700px;
+        align-items: center;
+
+        .timeContainer {
+            margin: 0 1rem;
+            width: 70px;
+        }
+
+        .progressBarWraper {
+            width: 70%;
+            background: rgb(255, 255, 255);
+            height: 3px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            border-radius: 20px;
+            cursor: pointer;
+
+            .circus {
+                width: 13px;
+                height: 13px;
+                background: #4E82B1;
+                border-radius: 50px;
+                position: absolute;
+                z-index: 999;
+            }
+
+            .progressBar {
+                position: absolute;
+                height: 3px;
+                background: #4E82B1;
+                border-radius: 20px;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+        }
+
+        
+    }
+
+    .volumeButtonContainer {
+        margin-left: 1rem;
+    }
+}

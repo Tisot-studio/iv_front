@@ -12,12 +12,12 @@ export default function TrackCard({cover, title, links}) {
   return <div className={styles.trackCard}>
             <div className={styles.imageContainer}>
                 <Image src={cover} width={300} height={300} className={styles.imageCover} />
-                <div className={styles.iconContainer}>
+                {/* <div className={styles.iconContainer}>
                     <FontAwesomeIcon icon={faPlayCircle} className={styles.icon} />
-                </div>
+                </div> */}
             </div>
             <div className={styles.titleContainer}>
-                <p>
+                <p className={styles.p}>
                     {title}
                 </p>
             </div>

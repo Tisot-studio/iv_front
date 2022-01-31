@@ -4,6 +4,7 @@ import { faFacebook, faSpotify, faSoundcloud, faInstagram } from '@fortawesome/f
 import Link from 'next/link';
 
 
+
 export default function Footer() {
   return <footer className={styles.footer}>
             <div className={styles.container}>
