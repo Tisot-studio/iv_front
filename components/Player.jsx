@@ -74,10 +74,6 @@ export default function Player() {
     }, [podcast.current])
 
 
-
-
-
-
     function updateProgressBar(event) {
         let width = pb.current.clientWidth;
         let clickX = event.offsetX;
@@ -85,6 +81,10 @@ export default function Player() {
         podcast.current.currentTime = (clickX / width) * duration;
     }
 
+
+    function updateProgressBarOnDrag(event){
+            podcast.current.currentTime += Math.floor(event.offsetX % 10);
+    }
 
     
   return <div className={styles.playerContainer} >
@@ -116,8 +116,17 @@ export default function Player() {
                 <div className={styles.timeContainer}>
                     {currentMinute < 10? `0${currentMinute}` : currentMinute }:{ currentSecond < 10 ? `0${currentSecond}` : currentSecond}
                 </div>
-                <div className={styles.progressBarWraper} onClick={()=> updateProgressBar(event)} ref={pb}>
-                    <div className={styles.circus} style={{marginLeft: `${progressWidth - 1.5}%`}}> </div> 
+                <div 
+                    className={styles.progressBarWraper}
+                    onClick={()=> updateProgressBar(event)} 
+                    ref={pb} 
+                    >
+                    <div draggable
+                    onDragStart={()=>dispatch(stopPlay())} 
+                    onDrag={()=>updateProgressBarOnDrag(event)} 
+                    onDragEnd={()=>dispatch(startPlay())}
+                    className={styles.circus} 
+                    style={{marginLeft: `${progressWidth - 1.5}%`}}> </div> 
                     <div className={styles.progressBar} style={{width: `${progressWidth}%`}}> </div>
                 </div>
                 {
