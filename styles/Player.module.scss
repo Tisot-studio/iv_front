@@ -98,6 +98,50 @@
     }
 
     .volumeButtonContainer {
-        margin-left: 1rem;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 50px;
+        cursor: pointer;
+
+        .volumeIcon {
+            position: relative;
+            background: black;
+
+        }
+
+        .volumeSliderContainer {
+            background: black;
+            padding: 20px 10px;
+            transform: rotate(-90deg) translateX(-1000px);
+            opacity: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            bottom: 100px;
+            background: black;
+            transition: all 1s ease-in-out;
+        }
+
+            .slider {
+                cursor: pointer;
+
+                // &::-webkit-slider-thumb {
+                //    background: red;
+                // }
+        }
+            
+
+
+    &:hover {
+        .volumeSliderContainer {
+            transform: rotate(-90deg) translateX(0);
+            opacity: 1;
+        }
+
+    }
+
+
     }
 }

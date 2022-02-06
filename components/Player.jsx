@@ -2,13 +2,14 @@ import styles from '../styles/Player.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUndo, faRedo, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 import { faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
-
 import { useRef, useState, useEffect } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { stopPlay, startPlay } from '../redux/player/player.actions';
 
 export default function Player() {
+
+    const podcast = useRef(null)
+    const pb = useRef(null)
 
     const player = useSelector((state)=> state.player)
     const { currentPodcast, playMusic } = player
@@ -16,49 +17,44 @@ export default function Player() {
 
     const dispatch = useDispatch()
 
-    const [playPodcast, setPlayPodcast] = useState(false)
+    // Progress Bar Settings
     const [progressWidth, setProgressWidth] = useState(0)
+
     const [durationMinutes, setDurationMinutes] = useState(0)
     const [durationSeconds, setDurationSeconds] = useState(0)
 
     const [currentMinute, setCurrentMinute] = useState(0)
     const [currentSecond, setCurrentSecond] = useState(0)
 
-    const podcast = useRef(null)
-    const pb = useRef(null)
+    // Volume Slider 
+    const [volumeValue, setVolumeValue] = useState(0.5)
 
-    // Buttons
-    function playSong() {
-        setPlayPodcast(true)
-       podcast.current.play();
-      }
-      
+    if(podcast.current){
+        podcast.current.volume = volumeValue
+    }
 
-    function pauseSong() {
-        setPlayPodcast(false)
-        podcast.current.pause();
-      }
-
-
+    // Rewind Button
     function rewind(param) {
         podcast.current.currentTime += param;
     }
 
+
     useEffect(()=>{
         
         if (playMusic) {
-            playSong()
+            podcast.current.play()
         } 
         else {
-            pauseSong()
+            podcast.current.pause()
         }
-
     })
 
 
     useEffect(()=>{
         podcast.current.ontimeupdate = (event)=> {
             const {currentTime, duration} = event.target
+
+            // Progress Bar Width
             setProgressWidth((currentTime / duration) * 100)
             
             // Current time
@@ -70,7 +66,6 @@ export default function Player() {
             setDurationMinutes(Math.floor((duration - currentTime) / 60))
             
         }
-
     }, [podcast.current])
 
 
@@ -87,60 +82,68 @@ export default function Player() {
     }
 
     
-  return <div className={styles.playerContainer} >
-            <audio src={audio} ref={podcast}></audio>
-            <div className={styles.buttonContainer}>
-                <FontAwesomeIcon 
-                    icon={ playPodcast === false? faPlayCircle : faPauseCircle} 
-                    onClick={()=> (playPodcast === false? dispatch(startPlay()) : dispatch(stopPlay()))} 
-                    />
-            </div>
-            <div className={styles.coverContainer}>
-                
-            </div>
-            <div className={styles.titleContainer}>
-                VERANO PARTY EPISODE {episode}
-                
-            </div>
-            <div className={styles.rewindButtonsContainer}>
-                <div className={styles.rewindButtonContainer}>
-                    <FontAwesomeIcon icon={faUndo} onClick={()=> rewind(-30)}/>
-                    <p className={styles.rewindTime}> 30s </p>
+    return <div className={styles.playerContainer} >
+                <audio src={audio} ref={podcast}></audio>
+                <div className={styles.buttonContainer}>
+                    <FontAwesomeIcon 
+                        icon={!playMusic ? faPlayCircle : faPauseCircle} 
+                        onClick={()=> (!playMusic ? dispatch(startPlay()) : dispatch(stopPlay()))} 
+                        />
                 </div>
-                <div className={styles.rewindButtonContainer} onClick={()=> rewind(30)}>
-                    <FontAwesomeIcon icon={faRedo} />
-                    <p className={styles.rewindTime}> 30s </p>
+                <div className={styles.coverContainer}>
+                    
                 </div>
-            </div>
-            <div className={styles.progressBarContainer}  >
-                <div className={styles.timeContainer}>
-                    {currentMinute < 10? `0${currentMinute}` : currentMinute }:{ currentSecond < 10 ? `0${currentSecond}` : currentSecond}
+                <div className={styles.titleContainer}>
+                    VERANO PARTY EPISODE {episode}
+                    
                 </div>
-                <div 
-                    className={styles.progressBarWraper}
-                    onClick={()=> updateProgressBar(event)} 
-                    ref={pb} 
-                    >
-                    <div draggable
-                    onDragStart={()=>dispatch(stopPlay())} 
-                    onDrag={()=>updateProgressBarOnDrag(event)} 
-                    onDragEnd={()=>dispatch(startPlay())}
-                    className={styles.circus} 
-                    style={{marginLeft: `${progressWidth - 1.5}%`}}> </div> 
-                    <div className={styles.progressBar} style={{width: `${progressWidth}%`}}> </div>
+                <div className={styles.rewindButtonsContainer}>
+                    <div className={styles.rewindButtonContainer}>
+                        <FontAwesomeIcon icon={faUndo} onClick={()=> rewind(-30)}/>
+                        <p className={styles.rewindTime}> 30s </p>
+                    </div>
+                    <div className={styles.rewindButtonContainer} onClick={()=> rewind(30)}>
+                        <FontAwesomeIcon icon={faRedo} />
+                        <p className={styles.rewindTime}> 30s </p>
+                    </div>
                 </div>
-                {
-                    durationSeconds >= 0 ? 
+                <div className={styles.progressBarContainer}  >
                     <div className={styles.timeContainer}>
-                    - {durationMinutes < 10 ? `0${durationMinutes}` : durationMinutes}:{durationSeconds < 10 ? `0${durationSeconds}` : durationSeconds}
-                   </div>
-                   :
-                   null
-                }
-            </div>
-            <div className={styles.volumeButtonContainer}>
-                <FontAwesomeIcon icon={faVolumeUp} />
-            </div>
-
-        </div>;
-}
+                        {currentMinute < 10? `0${currentMinute}` : currentMinute }:{ currentSecond < 10 ? `0${currentSecond}` : currentSecond}
+                    </div>
+                    <div className={styles.progressBarWraper}
+                        onClick={()=> updateProgressBar(event)} 
+                        ref={pb} >
+                        <div draggable
+                        onDragStart={()=>dispatch(stopPlay())} 
+                        onDrag={()=>updateProgressBarOnDrag(event)} 
+                        onDragEnd={()=>dispatch(startPlay())}
+                        className={styles.circus} 
+                        style={{marginLeft: `${progressWidth - 1.5}%`}}> </div> 
+                        <div className={styles.progressBar} style={{width: `${progressWidth}%`}}> </div>
+                    </div>
+                    {
+                        durationSeconds >= 0 ? 
+                        <div className={styles.timeContainer}>
+                        - {durationMinutes < 10 ? `0${durationMinutes}` : durationMinutes}:{durationSeconds < 10 ? `0${durationSeconds}` : durationSeconds}
+                    </div>
+                    :
+                    null
+                    }
+                </div>
+                <div className={styles.volumeButtonContainer}>
+                        
+                        <div className={styles.volumeSliderContainer}>
+                        <input className={styles.slider} 
+                        type="range" 
+                        min="0" 
+                        max="1" 
+                        value={volumeValue}
+                        step='0.01'
+                        onChange={(e)=>setVolumeValue(e.target.value)}
+                        />
+                        </div>
+                        <FontAwesomeIcon icon={faVolumeUp} className={styles.volumeIcon}/>
+                </div>
+            </div>;
+    }
