@@ -8,12 +8,18 @@ import { stopPlay, startPlay } from '../redux/player/player.actions';
 
 export default function Player() {
 
+    // Запуск и остановка воспроизведения через пробел
+    // document.addEventListener('keydown', function(event){
+	// 	console.log(`Key: ${event.key} with keycode ${event.keyCode} has been pressed`);
+       
+    // })
+
     const podcast = useRef(null)
     const pb = useRef(null)
 
     const player = useSelector((state)=> state.player)
-    const { currentPodcast, playMusic } = player
-    const {podId, cover, header, episode, color, tracklist, description, audio} = currentPodcast
+    const { currentPodcast, playMusic, hidden } = player
+    const {cover, header, episode, color, audio} = currentPodcast
 
     const dispatch = useDispatch()
 
@@ -27,7 +33,7 @@ export default function Player() {
     const [currentSecond, setCurrentSecond] = useState(0)
 
     // Volume Slider 
-    const [volumeValue, setVolumeValue] = useState(0.5)
+    const [volumeValue, setVolumeValue] = useState(0.3)
 
     if(podcast.current){
         podcast.current.volume = volumeValue
@@ -81,20 +87,19 @@ export default function Player() {
             podcast.current.currentTime += Math.floor(event.offsetX % 10);
     }
 
+ 
     
-    return <div className={styles.playerContainer} >
+    return <div className={`${styles.playerContainer} ${ hidden ? styles.hiddenPlayer : null}`}>
                 <audio src={audio} ref={podcast}></audio>
                 <div className={styles.buttonContainer}>
                     <FontAwesomeIcon 
                         icon={!playMusic ? faPlayCircle : faPauseCircle} 
-                        onClick={()=> (!playMusic ? dispatch(startPlay()) : dispatch(stopPlay()))} 
+                        onClick={()=> (!playMusic ? dispatch(startPlay()) : dispatch(stopPlay()))}
                         />
                 </div>
-                <div className={styles.coverContainer}>
-                    
-                </div>
+                <div className={styles.coverContainer} style={{backgroundImage: `url('${cover}')`}}> </div>
                 <div className={styles.titleContainer}>
-                    VERANO PARTY EPISODE {episode}
+                    {header} EPISODE {episode}
                     
                 </div>
                 <div className={styles.rewindButtonsContainer}>
@@ -111,16 +116,14 @@ export default function Player() {
                     <div className={styles.timeContainer}>
                         {currentMinute < 10? `0${currentMinute}` : currentMinute }:{ currentSecond < 10 ? `0${currentSecond}` : currentSecond}
                     </div>
-                    <div className={styles.progressBarWraper}
-                        onClick={()=> updateProgressBar(event)} 
-                        ref={pb} >
+                    <div className={styles.progressBarWraper} onClick={()=> updateProgressBar(event)} ref={pb} >
                         <div draggable
-                        onDragStart={()=>dispatch(stopPlay())} 
-                        onDrag={()=>updateProgressBarOnDrag(event)} 
-                        onDragEnd={()=>dispatch(startPlay())}
-                        className={styles.circus} 
-                        style={{marginLeft: `${progressWidth - 1.5}%`}}> </div> 
-                        <div className={styles.progressBar} style={{width: `${progressWidth}%`}}> </div>
+                            onDragStart={()=>dispatch(stopPlay())} 
+                            onDrag={()=>updateProgressBarOnDrag(event)} 
+                            onDragEnd={()=>dispatch(startPlay())}
+                            className={styles.circus} 
+                            style={{marginLeft: `${progressWidth - 1.5}%`, background: `${color}` }}> </div> 
+                        <div className={styles.progressBar} style={{width: `${progressWidth}%`, background: `${color}`}}> </div>
                     </div>
                     {
                         durationSeconds >= 0 ? 

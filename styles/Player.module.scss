@@ -1,3 +1,7 @@
+.hiddenPlayer {
+    transform: translateY(100px);
+}
+
 .playerContainer {
     width: 100%;
     padding: 0 2rem;
@@ -10,10 +14,11 @@
     color: white;
     bottom: 0;
     z-index: 999;
+    transition: all 1s ease-in-out;
 
 
     .buttonContainer {
-        width: 50px;
+        width: 3.5rem;
         border-right: 1px solid black;
         font-size: 2.5rem;
         cursor: pointer;
@@ -21,20 +26,20 @@
     }
 
     .coverContainer {
-        width: 50px;
+        width: 3.5rem;
         height: 100%;
-        border-right: 1px solid black;
-        background-image: url('/imgs/covers/amazing_machine.jpg');
         background-size: cover;
         margin: 0 0.5rem;
     }
 
     .titleContainer {
         margin: 0 0.5rem;
+        width: 16.5rem;
+        text-align: center;
     }
 
     .rewindButtonsContainer {
-        width: 200px;
+        width: 10rem;
         height: 100%;
         display: flex;
         justify-content: center;
@@ -60,7 +65,8 @@
 
         .timeContainer {
             margin: 0 1rem;
-            width: 70px;
+            width: 4rem;
+            text-align: center;
         }
 
         .progressBarWraper {
@@ -76,7 +82,6 @@
             .circus {
                 width: 13px;
                 height: 13px;
-                background: #4E82B1;
                 border-radius: 50px;
                 position: absolute;
                 z-index: 999;
@@ -86,7 +91,6 @@
             .progressBar {
                 position: absolute;
                 height: 3px;
-                background: #4E82B1;
                 border-radius: 20px;
                 display: flex;
                 justify-content: flex-end;
@@ -100,6 +104,7 @@
     .volumeButtonContainer {
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         height: 100%;
         width: 50px;
         cursor: pointer;
@@ -113,7 +118,7 @@
         .volumeSliderContainer {
             background: black;
             padding: 20px 10px;
-            transform: rotate(-90deg) translateX(-1000px);
+            transform: rotate(-90deg) translateY(30px) translateX(-1000px);
             opacity: 0;
             right: 0;
             display: flex;
@@ -126,17 +131,13 @@
 
             .slider {
                 cursor: pointer;
-
-                // &::-webkit-slider-thumb {
-                //    background: red;
-                // }
         }
             
 
 
     &:hover {
         .volumeSliderContainer {
-            transform: rotate(-90deg) translateX(0);
+            transform: rotate(-90deg) translateY(30px) translateX(0);
             opacity: 1;
         }
 
