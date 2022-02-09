@@ -21,27 +21,20 @@ export default function RadioShCard({show}) {
 
     }, [dispatch])
 
-    const [myOpacity, setMyOpacity] = useState(true)
+    const [tracklistView, setTracklistView] = useState(true)
 
-    function myF(){
-            setMyOpacity(!myOpacity)
-    }
-
-
-
+ 
   return <div className={styles.container}>
-            <div className={styles.imageContainer} style={{backgroundImage: `url(${cover})`}}>
+            <div className={styles.imageContainer} style={ tracklistView ?  {backgroundImage: `url(${cover})`} : {background:`${color}`}}>
 
-                <div className={styles.tracListContainer} style={{opacity: `${myOpacity === true ? 0 : 1}`}}>
-                    <p>
-                        {tracklist}
+                <div className={styles.tracListContainer} style={{opacity: `${tracklistView ? 0 : 1}`}}>
+                    <p dangerouslySetInnerHTML={{ __html: `${tracklist}` }}>
                     </p>
 
                 </div>
                 <div className={styles.vTlContainer}>
-                    <p className={styles.vTlButton} onClick={()=> myF()}> View Tracklist </p>
+                    <p className={styles.vTlButton} onClick={()=> setTracklistView(!tracklistView)}> { tracklistView ? 'View Tracklist' : 'Hide Tracklist' }  </p>
                 </div>
-                <div className={styles.blur}> </div>
             </div>
             <div className={styles.descriptionContainer}>
                 <div className={styles.headersContainer}>

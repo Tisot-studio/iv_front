@@ -11,6 +11,7 @@ import Footer from '../components/Footer'
 import Nav from '../components/Nav'
 import Player from '../components/Player'
 
+
 function MyApp({ Component, pageProps }) {
   return <div>
             <Provider store={store}>

@@ -1,10 +1,10 @@
 import styles from '../styles/Player.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUndo, faRedo, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
-import { faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
+import { faUndo, faRedo, faVolumeUp, faPlayCircle, faPauseCircle, faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useRef, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { stopPlay, startPlay } from '../redux/player/player.actions';
+import Image from 'next/image';
 
 export default function Player() {
 
@@ -22,6 +22,8 @@ export default function Player() {
     const {cover, header, episode, color, audio} = currentPodcast
 
     const dispatch = useDispatch()
+
+    const [openMobilePlayer, setOpenMobilePlayer] = useState(false)
 
     // Progress Bar Settings
     const [progressWidth, setProgressWidth] = useState(0)
@@ -89,7 +91,11 @@ export default function Player() {
 
  
     
-    return <div className={`${styles.playerContainer} ${ hidden ? styles.hiddenPlayer : null}`}>
+    return <>
+    <div className={`${styles.progressBarMobileWraper} ${ hidden ? styles.hiddenPlayer : null}`}>
+        <div className={styles.progressBar} style={{width: `${progressWidth}%`, background: `${color}`}}> </div>
+    </div>
+    <div className={`${styles.playerContainer} ${ hidden ? styles.hiddenPlayer : null}`}>
                 <audio src={audio} ref={podcast}></audio>
                 <div className={styles.buttonContainer}>
                     <FontAwesomeIcon 
@@ -116,7 +122,7 @@ export default function Player() {
                     <div className={styles.timeContainer}>
                         {currentMinute < 10? `0${currentMinute}` : currentMinute }:{ currentSecond < 10 ? `0${currentSecond}` : currentSecond}
                     </div>
-                    <div className={styles.progressBarWraper} onClick={()=> updateProgressBar(event)} ref={pb} >
+                    <div className={styles.progressBarWraper} onClick={()=> updateProgressBar(event)} ref={ openMobilePlayer ? null : pb} >
                         <div draggable
                             onDragStart={()=>dispatch(stopPlay())} 
                             onDrag={()=>updateProgressBarOnDrag(event)} 
@@ -134,19 +140,78 @@ export default function Player() {
                     null
                     }
                 </div>
+                <FontAwesomeIcon icon={faChevronUp} className={styles.arrowUp} onClick={()=> setOpenMobilePlayer(true)}/> 
                 <div className={styles.volumeButtonContainer}>
-                        
-                        <div className={styles.volumeSliderContainer}>
+                    <div className={styles.volumeSliderContainer}>
                         <input className={styles.slider} 
-                        type="range" 
-                        min="0" 
-                        max="1" 
-                        value={volumeValue}
-                        step='0.01'
-                        onChange={(e)=>setVolumeValue(e.target.value)}
+                                type="range" 
+                                min="0" 
+                                max="1" 
+                                value={volumeValue}
+                                step='0.01'
+                                onChange={(e)=>setVolumeValue(e.target.value)}
                         />
-                        </div>
-                        <FontAwesomeIcon icon={faVolumeUp} className={styles.volumeIcon}/>
+                    </div>
+                    <FontAwesomeIcon icon={faVolumeUp} className={styles.volumeIcon}/>
                 </div>
-            </div>;
+                <div className={openMobilePlayer ? styles.mobilePopUpOpen : styles.mobilePopUpClosed}>
+                    <div className={styles.arrowDownContainer}>
+                        <FontAwesomeIcon icon={faChevronDown} className={styles.arrowDownIcon} onClick={()=> setOpenMobilePlayer(false)}/>
+                    </div>
+                    <div className={styles.mobCoverContainer}>
+                        <div className={styles.mobCover} style={{backgroundImage: `url('${cover}')`}}> </div>
+                    </div>
+                    <div className={styles.mobProgressBarContainer}>
+                        <div className={styles.mobProgressBarContainer}  >
+                            <div className={styles.mobTimeContainer}>
+                                {currentMinute < 10? `0${currentMinute}` : currentMinute }:{ currentSecond < 10 ? `0${currentSecond}` : currentSecond}
+                            </div>
+                            <div className={styles.mobProgressBarWraper} onClick={()=> updateProgressBar(event)} ref={openMobilePlayer ? pb : null} >
+                                <div draggable
+                                    onDragStart={()=>dispatch(stopPlay())} 
+                                    onDrag={()=>updateProgressBarOnDrag(event)} 
+                                    onDragEnd={()=>dispatch(startPlay())}
+                                    className={styles.mobCircus} 
+                                    style={{marginLeft: `${progressWidth - 1.5}%`, background: `${color}` }}> </div> 
+                                <div className={styles.mobProgressBar} style={{width: `${progressWidth}%`, background: `${color}`}}> </div>
+                            </div>
+                            {
+                                durationSeconds >= 0 ? 
+                                <div className={styles.mobTimeContainer}>
+                                - {durationMinutes < 10 ? `0${durationMinutes}` : durationMinutes}:{durationSeconds < 10 ? `0${durationSeconds}` : durationSeconds}
+                            </div>
+                            :
+                            null
+                            }
+                        </div>
+
+                    </div>
+                    <div className={styles.mobTitleContainer}>
+                        {header} EPISODE {episode}
+                    </div>
+
+                    <div className={styles.mobButtonsContainer}>
+                    <div className={styles.mobRewindButtonContainer}>
+                        <FontAwesomeIcon icon={faUndo} onClick={()=> rewind(-30)}/>
+                        <p className={styles.mobRewindTime}> 30s </p>
+                    </div>
+
+                    <div className={styles.mobButtonContainer}>
+                    <FontAwesomeIcon 
+                        icon={!playMusic ? faPlayCircle : faPauseCircle} 
+                        onClick={()=> (!playMusic ? dispatch(startPlay()) : dispatch(stopPlay()))}
+                        />
+                    </div>
+
+                    <div className={styles.mobRewindButtonContainer} onClick={()=> rewind(30)}>
+                        <FontAwesomeIcon icon={faRedo} />
+                        <p className={styles.mobRewindTime}> 30s </p>
+                    </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+
+            </>
     }

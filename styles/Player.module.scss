@@ -2,11 +2,18 @@
     transform: translateY(100px);
 }
 
+.progressBarMobileWraper {
+    display: none;
+}
+
+.mobilePopUpOpen, .mobilePopUpClosed {
+    display: none;
+}
+
 .playerContainer {
     width: 100%;
     padding: 0 2rem;
     height: 3.5rem;
-    border: 1px solid black;
     position: fixed;
     display: flex;
     align-items: center;
@@ -19,7 +26,6 @@
 
     .buttonContainer {
         width: 3.5rem;
-        border-right: 1px solid black;
         font-size: 2.5rem;
         cursor: pointer;
 
@@ -101,6 +107,10 @@
         
     }
 
+    .arrowUp {
+        display: none;
+    }
+
     .volumeButtonContainer {
         display: flex;
         align-items: center;
@@ -143,6 +153,195 @@
 
     }
 
+    .mobilePopUp {
+        display: none;
+    }
+
 
     }
+}
+
+// =========================================================================
+// mobile style
+@media (max-width: 768px) {
+
+    .progressBarMobileWraper {
+            width: 100%;
+            background: rgb(255, 255, 255);
+            height: 3px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            border-radius: 20px;
+            cursor: pointer;
+            bottom: 3.5rem;
+
+            .progressBar {
+                position: absolute;
+                height: 3px;
+                border-radius: 20px;
+                display: flex;
+                justify-content: flex-end;
+            }
+    }
+    
+    .playerContainer {
+        padding: 0 0rem;
+
+    
+        .buttonContainer {
+            width: 10%;
+            font-size: 2rem;
+            margin-left: 1rem;
+        }
+    
+        .coverContainer {
+            display: none;
+        }
+    
+        .titleContainer {
+            margin: 0 0.5rem;
+            width: 80%;
+            text-align: center;
+        }
+    
+        .rewindButtonsContainer {
+            display: none;
+        }
+    
+        .progressBarContainer {
+            display: none;
+        }
+
+        .arrowUp {
+            display: block;
+            font-size: 1.3rem;
+            margin-right: 1rem;
+        }
+    
+        .volumeButtonContainer {
+            display: none;
+        }
+
+        
+    }
+
+
+    .mobilePopUpOpen, .mobilePopUpClosed {
+        padding-top: 2rem;
+        height: 82rem;
+        width: 100%;
+        background: rgb(0, 0, 0);
+        z-index: 1;
+        position: absolute;
+        transition: all 0.5s cubic-bezier(0.37, 0, 0.64, 0.92);
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mobilePopUpClosed {
+        transform: translateY(1000px); 
+    }
+
+
+    .arrowDownContainer {
+        width: 100%;
+        height: 3rem;
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    .mobCoverContainer {
+        width: 100%;
+        height: 24rem;
+        padding: 2rem 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+        .mobCover {
+            width:100%;
+            height: 100%;
+            background-size: cover;
+        }
+    }
+
+    .mobProgressBarContainer {
+        width: 100%;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+
+            .mobTimeContainer {
+                margin: 0 1rem;
+                width: 4rem;
+                text-align: center;
+                font-size: 0.9rem;
+            }
+    
+            .mobProgressBarWraper {
+                width: 70%;
+                background: rgb(255, 255, 255);
+                height: 3px;
+                display: flex;
+                align-items: center;
+                position: relative;
+                border-radius: 20px;
+                cursor: pointer;
+    
+                .mobCircus {
+                    width: 13px;
+                    height: 13px;
+                    border-radius: 50px;
+                    position: absolute;
+                    z-index: 999;
+                    cursor: grab;
+                }
+    
+                .mobProgressBar {
+                    position: absolute;
+                    height: 3px;
+                    border-radius: 20px;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+    
+            }
+    
+    }
+
+    .mobTitleContainer {
+        width: 100%;
+        height: 2rem;
+        text-align: center;
+        padding: 0.5rem 0;
+        font-size: 1.2rem;
+    }
+
+    .mobButtonsContainer {
+        margin-top: 1rem;
+        width: 100%;
+        height: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .mobRewindButtonContainer {
+            margin: 0 2rem;
+            font-size: 1.3rem;
+
+            .mobRewindTime {
+                font-size: 1rem;
+            }
+        }
+
+        .mobButtonContainer {
+            font-size: 3.5rem;
+        }
+
+    }
+
 }
