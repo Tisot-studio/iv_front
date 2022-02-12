@@ -14,7 +14,6 @@ export default function Menu() {
     const { menuOpen } = navigation
 
     // Animation
-
     // Create array with React refs
     const menuItemAnim = useRef([])
     menuItemAnim.current = []

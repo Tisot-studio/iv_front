@@ -38,7 +38,7 @@ export default function Nav() {
 
     return <nav className={styles.nav}>
             
-            <div className={styles.logo} >
+            <div className={styles.logo} onClick={()=> menuOpen ? dispatch(switchMenu()) : null}>
               <Link href='/'> 
                   <a>
                     ILYA <br/> VERANO
