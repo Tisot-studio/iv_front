@@ -36,18 +36,16 @@ export default function Video() {
                 <div className={styles.contentContainer}>
                     <div className={styles.frameContainer}>
                         <iframe className={styles.youTubeFrame} ref={animVideoFrame}  src="https://www.youtube.com/embed/SJUqRjuxgck" 
-                                title="YouTube video player" frameborder="0" 
+                                title="YouTube video player" frameBorder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
                                 gyroscope; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 <div className={styles.text} ref={animText}>
                     {currentLanguage === 'en' ? 'More videos on' : 'Больше видео на моем'}
-                       
                     <Link href='https://www.youtube.com/channel/UCFX7b718jrDeNGUb6bbW2og'>
                         <a className={styles.a} target='_blank'>
-                            {currentLanguage === 'en' ? 'my YouTube chanel' : 'YouTube канале'}
-                            ! 
+                            {currentLanguage === 'en' ? 'my YouTube chanel' : 'YouTube канале'}! 
                         </a>
                     </Link>
                 </div>

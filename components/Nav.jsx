@@ -33,8 +33,8 @@ export default function Nav() {
         gsap.to(bottomLine.current, {rotation: 0, x: 0, y: 0, duration: 0.3})
       }
     }, [menuOpen])
-      
 
+      
 
     return <nav className={styles.nav}>
             
