@@ -19,7 +19,7 @@ export default function Video() {
         gsap.to(head.current, {scale: 1, y:0, delay: 2, ease: Power2})
         gsap.to(animVideoFrame.current, { opacity: 1, y: 0, delay: 2.3, ease: Power2})
         gsap.to(animText.current, {opacity: 1, x: 0, delay: 2.3, ease: Power2})
-    })
+    }, [])
 
 
     return (

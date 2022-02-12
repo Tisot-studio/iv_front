@@ -1,6 +1,7 @@
 import styles from '../styles/Tracks.module.scss'
 import Head from 'next/head'
 import TrackCard from '../components/TrackCard'
+import PageTitle from '../components/PageTitle/PageTitle'
 
 
 export default function Tracks() {
@@ -15,7 +16,7 @@ export default function Tracks() {
                 beatport: 'hi',
                 itunes: 'hi',
                 soundcloud: 'hi'
-            }
+            },
         },
         {   
             id: 1,
@@ -26,7 +27,7 @@ export default function Tracks() {
                 beatport: 'hi',
                 itunes: 'hi',
                 soundcloud: 'hi'
-            }
+            },
         },
         {   
             id: 2,
@@ -37,7 +38,7 @@ export default function Tracks() {
                 beatport: 'hi',
                 itunes: 'hi',
                 soundcloud: 'hi'
-            }
+            },
         },
         {   
             id: 3,
@@ -48,7 +49,7 @@ export default function Tracks() {
                 beatport: 'hi',
                 itunes: 'hi',
                 soundcloud: 'hi'
-            }
+            },
         }
         
     ]
@@ -62,7 +63,7 @@ export default function Tracks() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.body}>
-                <div className={styles.title}> TRACKS </div>
+                <PageTitle en='TRACKS' ru='ТРЕКИ' />
                 <div className={styles.cardsContainer}>
                     {
                         db.map((item, i) => {
@@ -71,6 +72,7 @@ export default function Tracks() {
                                 cover={db[i].cover} 
                                 title={db[i].title}
                                 links={db[i].links}
+                                delay= {2.3 + i / 10}
                                 />
                         })
                     }

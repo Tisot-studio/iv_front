@@ -2,7 +2,7 @@ import styles from '../styles/RadioShows.module.scss'
 import Head from 'next/head'
 import RadioShCard from '../components/RadioShCard'
 import { useSelector } from 'react-redux'
-
+import PageTitle from '../components/PageTitle/PageTitle'
 
 export default function RadioShows() {
 
@@ -19,7 +19,7 @@ export default function RadioShows() {
             </Head>
 
             <main className={styles.body}>
-                <div className={styles.title}> RADIO SHOWS </div>
+                <PageTitle en='RADIO SHOWS' ru='ПОДКАСТЫ' />
                 <div className={styles.cardsContainer}>
 
                     {

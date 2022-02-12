@@ -23,7 +23,7 @@ export default function Contacts() {
         gsap.from(title_2.current, {opacity: 0, x: -100, delay: 2.4})
         gsap.from(address.current, {opacity: 0, x: 100, delay: 2.5})
         gsap.from(formRef.current, {opacity: 0, x: 100, delay: 2.6})
-    })
+    }, [])
 
 
     return (

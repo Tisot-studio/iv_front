@@ -2,11 +2,28 @@ import styles from '../styles/AboutMe.module.scss'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useSelector } from 'react-redux'
+import { useEffect, useRef } from 'react'
+import { gsap, Power2 } from 'gsap'
+import PageTitle from '../components/PageTitle/PageTitle'
 
 export default function AboutMe() {
 
     const navigation = useSelector((state)=> state.navigation)
     const { currentLanguage } = navigation
+
+
+    // Animation
+    const imageRef = useRef(null)
+    const contentRef = useRef(null)
+
+
+
+    useEffect(()=>{
+        gsap.from(imageRef.current, {opacity: 0, y: 100, delay: 2.3, ease: Power2})
+        gsap.from(contentRef.current, {opacity: 0, x: 100, delay: 2.4, ease: Power2})
+
+    }, [])
+
 
 
     return (
@@ -17,18 +34,12 @@ export default function AboutMe() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.body}>
-                {
-                    currentLanguage === 'en' ? 
-                    <div className={styles.title}> ABOUT ME </div>
-                    :
-                    <div className={styles.title}> БИОГРАФИЯ </div>
-                }
-                
-                <div className={styles.contentContainer}> 
-                    <div className={styles.imageContainer}>
+                <PageTitle en='ABOUT ME' ru='БИОГРАФИЯ' />                
+                <div className={styles.contentContainer} > 
+                    <div className={styles.imageContainer} ref={imageRef}>
                         <Image src='/imgs/IMG_1006_web.jpg' width={600} height={800} />
                     </div>
-                    <div className={styles.textContainer}>
+                    <div className={styles.textContainer} ref={contentRef}>
                         {
                             currentLanguage === 'en' ? 
                         <p>
