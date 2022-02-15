@@ -16,7 +16,7 @@ export default function TrackCard({cover, title, links, delay}) {
         gsap.from(cardRef.current, {opacity: 0, y: 100, delay: delay, ease: Power2})
     })
 
-
+    
     return <div className={styles.trackCard} ref={cardRef}>
                 <div className={styles.imageContainer}>
                     <Image src={cover} width={300} height={300} className={styles.imageCover} />
@@ -47,7 +47,6 @@ export default function TrackCard({cover, title, links, delay}) {
                             <FontAwesomeIcon icon={faSoundcloud} className={styles.icon} />
                         </a>
                     </Link>
-
                 </div>
             </div>;
     }

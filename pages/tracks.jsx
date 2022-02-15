@@ -2,57 +2,19 @@ import styles from '../styles/Tracks.module.scss'
 import Head from 'next/head'
 import TrackCard from '../components/TrackCard'
 import PageTitle from '../components/PageTitle/PageTitle'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { wrapper } from '../redux/store'
+import { listTracks } from '../redux/tracks/tracks.actions'
+import { useEffect } from 'react'
+
+function Tracks({releases, listTracks} ) {
 
 
-export default function Tracks() {
-
-    const db = [
-        {   
-            id: 0,
-            cover: '/imgs/covers/amazing_machine.jpg',
-            title: 'Ilya Verano - Amazing Machine EP',
-            links: {
-                spotify: 'hi',
-                beatport: 'hi',
-                itunes: 'hi',
-                soundcloud: 'hi'
-            },
-        },
-        {   
-            id: 1,
-            cover: '/imgs/covers/bassline.jpg',
-            title: 'Ilya Verano - Bassline (Original Mix)',
-            links: {
-                spotify: 'hi',
-                beatport: 'hi',
-                itunes: 'hi',
-                soundcloud: 'hi'
-            },
-        },
-        {   
-            id: 2,
-            cover: '/imgs/covers/keep_moving.jpg',
-            title: 'Ilya Verano - Keep Moving EP',
-            links: {
-                spotify: 'hi',
-                beatport: 'hi',
-                itunes: 'hi',
-                soundcloud: 'hi'
-            },
-        },
-        {   
-            id: 3,
-            cover: '/imgs/covers/what_you_want.jpg',
-            title: 'Ilya Verano - What You Want (Original Mix)',
-            links: {
-                spotify: 'hi',
-                beatport: 'hi',
-                itunes: 'hi',
-                soundcloud: 'hi'
-            },
-        }
-        
-    ]
+    useEffect(() => {
+        listTracks()
+    
+      }, [])
 
 
     return (
@@ -66,20 +28,38 @@ export default function Tracks() {
                 <PageTitle en='TRACKS' ru='ТРЕКИ' />
                 <div className={styles.cardsContainer}>
                     {
-                        db.map((item, i) => {
+                        releases.map((item, i) => {
                         return <TrackCard 
-                                key={db[i].id} 
-                                cover={db[i].cover} 
-                                title={db[i].title}
-                                links={db[i].links}
+                                key={releases[i].id} 
+                                cover={releases[i].cover} 
+                                title={releases[i].title}
+                                links={releases[i].links}
                                 delay= {2.3 + i / 10}
                                 />
                         })
                     }
                 </div>
-                
-               
             </main>
         </div>
     )
 }
+
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => () => {
+    store.dispatch(listTracks())
+  })
+
+  
+const mapStateToProps = (state) => ({
+    releases: state.tracks.tracks,
+  })
+
+  
+const mapDispatchToProps = (dispatch) => {
+    return {
+      listTracks: bindActionCreators(listTracks, dispatch),
+    }
+  }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tracks)

@@ -1,22 +1,22 @@
 const INITIAL_STATE = {
-    podcasts: [],
+    tracks: [],
     loading: true
 }
 
 
-export const podcastReducer = (state = INITIAL_STATE, action) => {
+export const tracksReducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
-        case 'PODCASTS_LIST_REQUEST':
+        case 'TRACKS_LIST_REQUEST':
             return {
                 loading: true,
-                podcasts: []
+                tracks: []
             }
-        case 'PODCASTS_LIST_SUCCES':
+        case 'TRACKS_LIST_SUCCES':
             return {
                 loading: false,
-                podcasts: action.payload
+                tracks: action.payload
             }
-        case 'PODCASTS_LIST_FAIL':
+        case 'TRACKS_LIST_FAIL':
             return {
                 loading: false,
                 error: action.payload
@@ -25,3 +25,4 @@ export const podcastReducer = (state = INITIAL_STATE, action) => {
                 return state
     }
 }
+

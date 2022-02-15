@@ -1,13 +1,22 @@
 import styles from '../styles/RadioShows.module.scss'
 import Head from 'next/head'
 import RadioShCard from '../components/RadioShCard'
-import { useSelector } from 'react-redux'
 import PageTitle from '../components/PageTitle/PageTitle'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { wrapper } from '../redux/store'
+import { useEffect } from 'react'
+import { listPodcasts } from '../redux/podcast/podcast.actions'
 
-export default function RadioShows() {
 
-    const podcast = useSelector((state)=> state.podcast)
-    const { podcasts } = podcast
+function RadioShows({podcasts, listPodcasts}) {
+
+
+    useEffect(() => {
+        listPodcasts()
+    
+      }, [])
+
 
    
     return (
@@ -33,3 +42,23 @@ export default function RadioShows() {
         </div>
     )
 }
+
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => () => {
+    store.dispatch(listPodcasts())
+  })
+
+  
+const mapStateToProps = (state) => ({
+    podcasts: state.podcast.podcasts,
+  })
+
+  
+const mapDispatchToProps = (dispatch) => {
+    return {
+      listPodcasts: bindActionCreators(listPodcasts, dispatch),
+    }
+  }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(RadioShows)

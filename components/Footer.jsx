@@ -2,11 +2,18 @@ import styles from '../styles/Footer.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faSpotify, faSoundcloud, faInstagram } from '@fortawesome/free-brands-svg-icons' 
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 
 
 
 export default function Footer() {
-  return <footer className={styles.footer}>
+
+
+    const player = useSelector((state)=> state.player)
+    const { hidden } = player
+
+
+  return <footer className={styles.footer} style={hidden ? null : {transform: 'translateY(-50px)'}}>
             <div className={styles.container}>
                 <div className="icons-wraper">
                     <Link href='https://www.facebook.com/ilyaverano'  > 

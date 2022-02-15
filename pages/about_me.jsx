@@ -48,7 +48,7 @@ export default function AboutMe() {
                             interest in DJing. He quickly bursts into the local scene and becomes a resident 
                             of the best nightclubs in Omsk. 
                             Now Ilya is working on his own sound. His tracks combine deep bass, 
-                            dynamic percussion, sensual synth, and sexy vocals. It's energy music for 
+                            dynamic percussion, sensual synth, and sexy vocals. Its energy music for 
                             underground dance floors where people cast their demons out. His first release 
                             came out in 2020, on the British label ODTech Select. Leftwing: Kody supported 
                             this track on their live session on Instagram. Now signed two EPs on Suma Records 

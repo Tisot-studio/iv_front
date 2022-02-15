@@ -38,7 +38,7 @@ export default function Video() {
                         <iframe className={styles.youTubeFrame} ref={animVideoFrame}  src="https://www.youtube.com/embed/SJUqRjuxgck" 
                                 title="YouTube video player" frameBorder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-                                gyroscope; picture-in-picture" allowfullscreen>
+                                gyroscope; picture-in-picture" allowFullScreen>
                         </iframe>
                     </div>
                 <div className={styles.text} ref={animText}>

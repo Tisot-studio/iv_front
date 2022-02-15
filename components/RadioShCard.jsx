@@ -9,6 +9,8 @@ import { gsap } from 'gsap'
 
 export default function RadioShCard({show}) {
 
+    console.log(show)
+
     const {podId, cover, header, episode, color, tracklist, description} = show
 
     const player = useSelector((state)=> state.player)

@@ -67,6 +67,11 @@
             margin: 0 1.5rem 0 0;
             font-size: 25px;
             padding-bottom: 3px;
+            transition: all 0.3s ease-in-out;
+
+        &:hover {
+            opacity: .8;
+        }
         }
 
 
