@@ -1,12 +1,16 @@
 import styles from '../styles/ContactsPage.module.scss'
 import Head from 'next/head'
 import { useSelector } from 'react-redux'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
+import axios from "axios"
 
 import PageTitle from '../components/PageTitle/PageTitle'
 
 export default function Contacts() {
+
+    const [email, setEmail] = useState('')
+    const [message, setMessage] = useState(false)
 
     const navigation = useSelector((state)=> state.navigation)
     const { currentLanguage } = navigation
@@ -24,6 +28,13 @@ export default function Contacts() {
         gsap.from(address.current, {opacity: 0, x: 100, delay: 2.5})
         gsap.from(formRef.current, {opacity: 0, x: 100, delay: 2.6})
     }, [])
+
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:8000/api/follow', { email: email } )
+        setMessage(true)
+    }
 
 
     return (
@@ -48,10 +59,23 @@ export default function Contacts() {
                     <div className={styles.titleContainer} ref={title_2}>
                     {currentLanguage === 'en' ? 'SIGN UP FOR NEWS' : 'ПОДПИШИСЬ НА НОВОСТИ'}:
                     </div>
-    
-                        <form className={styles.formContainer} ref={formRef}>
-                                <input type='email' className={styles.input} placeholder='Your email'/>
-                            <button className={styles.button}> SUBMIT </button>
+
+                        <form className={styles.formContainer} ref={formRef} onSubmit={submitHandler}>
+                        {
+                            message ? <div> Thank you for submit! </div> 
+                                    : 
+                                    <>
+                                    <input 
+                                        className={styles.input}
+                                        type='email' 
+                                        placeholder='Your email'
+                                        value={email}
+                                        onChange={(e)=> setEmail(e.target.value)}
+                                        required
+                                    />
+                                    <button className={styles.button} type='submit' value='Submit Form'> SUBMIT </button>
+                                    </>
+                        }
                         </form>
                 </div>
             </div>

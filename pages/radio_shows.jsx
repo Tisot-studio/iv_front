@@ -17,8 +17,7 @@ function RadioShows({podcasts, listPodcasts}) {
     
       }, [])
 
-
-   
+  
     return (
         <div className={styles.radioShowsPage}>
            <Head>
@@ -26,17 +25,14 @@ function RadioShows({podcasts, listPodcasts}) {
                 <meta name="description" content="Radio Shows" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
             <main className={styles.body}>
                 <PageTitle en='RADIO SHOWS' ru='ПОДКАСТЫ' />
                 <div className={styles.cardsContainer}>
-
                     {
                         podcasts.map((show, i)=> {
                             return <RadioShCard key={podcasts[i].podId} show={podcasts[i]}/>
                         })
                     }
-                    
                 </div>
             </main>
         </div>

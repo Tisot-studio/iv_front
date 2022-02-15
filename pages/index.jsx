@@ -5,7 +5,10 @@ import { useSelector } from 'react-redux'
 import { useEffect, useRef } from 'react'
 import { gsap, Power2 } from 'gsap'
 
-export default function Home() {
+
+export default function Home({data}) {
+
+  const { main_photo } = data[0]
 
   const navigation = useSelector((state)=> state.navigation)
   const { currentLanguage } = navigation
@@ -38,10 +41,19 @@ export default function Home() {
               </div>
             </div>
           <div className={styles.indexImage} ref={imageRef}>
-            <Image src='/imgs/IMG_0852_web.jpg' width={750} height={1000} />
+            <Image src={main_photo} width={750} height={1000} />
           </div>
         </div>
       </main>
     </div>
   )
+}
+
+
+export async function getServerSideProps() {
+
+  const res = await fetch(`http://127.0.0.1:8000/api/main`)
+  const data = await res.json()
+
+  return { props: { data } }
 }
